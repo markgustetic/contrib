@@ -585,23 +585,24 @@ func property(f *gen.Field) (*ogen.Property, error) {
 }
 
 var _types = map[string]*ogen.Schema{
-	"bool":      ogen.Bool(),
-	"time.Time": ogen.DateTime(),
-	"string":    ogen.String(),
-	"[]byte":    ogen.Bytes(),
-	"uuid.UUID": ogen.UUID(),
-	"int":       ogen.Int(),
-	"int8":      ogen.Int32(),
-	"int16":     ogen.Int32(),
-	"int32":     ogen.Int32(),
-	"uint":      ogen.Int32(),
-	"uint8":     ogen.Int32(),
-	"uint16":    ogen.Int32(),
-	"uint32":    ogen.Int32(),
-	"int64":     ogen.Int64(),
-	"uint64":    ogen.Int64(),
-	"float32":   ogen.Float(),
-	"float64":   ogen.Double(),
+	"bool":            ogen.Bool(),
+	"time.Time":       ogen.DateTime(),
+	"string":          ogen.String(),
+	"[]byte":          ogen.Bytes(),
+	"uuid.UUID":       ogen.UUID(),
+	"int":             ogen.Int(),
+	"int8":            ogen.Int32(),
+	"int16":           ogen.Int32(),
+	"int32":           ogen.Int32(),
+	"uint":            ogen.Int32(),
+	"uint8":           ogen.Int32(),
+	"uint16":          ogen.Int32(),
+	"uint32":          ogen.Int32(),
+	"int64":           ogen.Int64(),
+	"uint64":          ogen.Int64(),
+	"float32":         ogen.Float(),
+	"float64":         ogen.Double(),
+	"json.RawMessage": ogen.String(),
 }
 
 // OgenSchema returns the ogen.Schema to use for the given gen.Field.
@@ -640,6 +641,8 @@ func OgenSchema(f *gen.Field) (*ogen.Schema, error) {
 		}
 	}
 	t, ok := _types[s]
+	fmt.Println("checking type")
+
 	if !ok {
 		return nil, fmt.Errorf("no OAS-type exists for type %q of field %s", s, f.StructField())
 	}
